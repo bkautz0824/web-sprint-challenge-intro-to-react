@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled, { keyframes } from 'styled-components';
 
 import Character from './components/Character'
 
@@ -35,7 +34,7 @@ const App = () => {
           console.log("hello")
 
           return (
-            <h1 alt = {nameObj.name}> {nameObj.name} </h1>
+           <Character nameObj={nameObj}/>
           )
         })
       }
