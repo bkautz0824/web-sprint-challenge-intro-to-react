@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import styled, { keyframes } from 'styled-components';
+
+import Character from './components/Character'
+
+
 
 const App = () => {
+  const [names, setNames] = useState([{
+    name: 'name'
+  }])
+
+
+  useEffect(() => {
+    axios.get('https://swapi.dev/api/people/')
+    .then(res => {
+      console.log(res.data);
+      setNames(res.data);
+    })
+    .catch(err => console.log(err))
+  }, [])
+
   // Try to think through what state you'll need for this app before starting. Then build out
   // the state properties here.
 
@@ -10,9 +30,40 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      {
+        names.map(nameObj => {
+          console.log("hello")
+
+          return (
+            <h1 alt = {nameObj.name}> {nameObj.name} </h1>
+          )
+        })
+      }
     </div>
   );
 }
 
 export default App;
+
+/**
+ * "results": [
+  {
+      "id": 0,
+      "name": "Luke Skywalker", 
+      "birth_year": "19BBY" 
+  }, 
+  {
+      "id": 1,
+      "name": "C-3PO",  
+      "birth_year": "112BBY", 
+  }, 
+  {
+      "id": ,
+      "name": "R2-D2", 
+      "birth_year": "33BBY", 
+  }, 
+]
+}
+ */
+
+
